@@ -100,9 +100,11 @@ public class Aplicacao implements Application {
           public void fileReceived(File f, ByteBuffer metadata) {
             try {
               String originalFileName = new SimpleInputBuffer(metadata).readUTF();
-              File dest = new File("delme2.txt");
+              File dest = new File("/tmp/delme2.txt");
+              
               System.out.println("Moving "+f+" to "+dest+" original:"+originalFileName);
               System.out.println(f.renameTo(dest));
+              System.out.println("Renomeou");
             } catch (IOException ioe) {
               System.out.println("Error deserializing file name. "+ioe);
             }

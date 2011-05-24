@@ -39,23 +39,16 @@ package com.ufpr.gdd;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
-import java.util.Iterator;
-import java.util.Vector;
-
 import rice.environment.Environment;
-import rice.environment.params.simple.SimpleParameters;
 import rice.p2p.commonapi.*;
-import rice.p2p.commonapi.rawserialization.RawMessage;
 import rice.pastry.NodeHandle;
 import rice.pastry.NodeIdFactory;
 import rice.pastry.PastryNode;
 import rice.pastry.PastryNodeFactory;
 import rice.pastry.commonapi.PastryIdFactory;
-import rice.pastry.direct.*;
 import rice.pastry.leafset.LeafSet;
 import rice.pastry.socket.SocketPastryNodeFactory;
 import rice.pastry.standard.RandomNodeIdFactory;
-import sun.org.mozilla.javascript.Node;
 
 /**
  * This Principal shows how to setup a FreePastry node using the Socket
@@ -171,7 +164,7 @@ public class Principal {
 			bootaddress = new InetSocketAddress(bootaddr, bootport);
 
 			// launch our node!
-			Principal dt = new Principal(bindport, bootaddress, env);
+			new Principal(bindport, bootaddress, env);
 		} catch (Exception e) {
 			// remind user how to use
 			System.out.println("Usage:");
