@@ -98,7 +98,7 @@ public class Principal {
 
 		IdFactory idFactory = new PastryIdFactory(env);
 
-		Aplicacao apps = new Aplicacao(node, idFactory);
+		Aplicacao app = new Aplicacao(node, idFactory);
 
 		node.boot(bootaddress);
 
@@ -118,6 +118,24 @@ public class Principal {
 
 		System.out.println("Finished creating new node " + node);
 
+	    // send directly to my leafset
+	    LeafSet leafSet = node.getLeafSet();
+	    
+	    // this is a typical loop to cover your leafset.  Note that if the leafset
+	    // overlaps, then duplicate nodes will be sent to twice
+	    for (int i=-leafSet.ccwSize(); i<=leafSet.cwSize(); i++) {
+	      if (i != 0) { // don't send to self
+	        // select the item
+	        NodeHandle nh = leafSet.get(i);
+	        
+	        // send the message directly to the node
+	        app.sendMyMsgDirect(nh);   
+	        
+	        // wait a sec
+	        env.getTimeSource().sleep(1000);
+	      }
+	    }
+		
 	}
 
 	/**
