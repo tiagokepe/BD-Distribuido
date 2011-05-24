@@ -55,7 +55,6 @@ import rice.pastry.direct.*;
 import rice.pastry.leafset.LeafSet;
 import rice.pastry.socket.SocketPastryNodeFactory;
 import rice.pastry.standard.RandomNodeIdFactory;
-import sun.org.mozilla.javascript.Node;
 
 /**
  * This Principal shows how to setup a FreePastry node using the Socket
