@@ -39,16 +39,16 @@ package com.ufpr.gdd;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import rice.Continuation;
 import rice.environment.Environment;
-import rice.p2p.commonapi.*;
-import rice.pastry.NodeHandle;
-import rice.pastry.NodeIdFactory;
-import rice.pastry.PastryNode;
-import rice.pastry.PastryNodeFactory;
+import rice.p2p.commonapi.Id;
+import rice.p2p.commonapi.NodeHandle;
+import rice.p2p.past.*;
+import rice.pastry.*;
 import rice.pastry.commonapi.PastryIdFactory;
-import rice.pastry.leafset.LeafSet;
 import rice.pastry.socket.SocketPastryNodeFactory;
 import rice.pastry.standard.RandomNodeIdFactory;
+import rice.persistence.*;
 
 /**
  * This Principal shows how to setup a FreePastry node using the Socket
@@ -89,10 +89,17 @@ public class Principal {
 
 		PastryNode node = factory.newNode();
 
-		IdFactory idFactory = new PastryIdFactory(env);
+		PastryIdFactory idFactory = new PastryIdFactory(env);
 
-		Aplicacao app = new Aplicacao(node, idFactory);
+//		Aplicacao app = new Aplicacao(node, idFactory);
+		
+		
+		Storage stor = new MemoryStorage(idFactory);
+		Past pst = new PastImpl(node, new StorageManagerImpl(idFactory, stor, new LRUCache( new MemoryStorage(idFactory), 512 * 1024, node.getEnvironment())), 0, "");
 
+		// Cria clase que manipulará requisições na DHT.
+		Manipulacao mp = new Manipulacao(pst, env, idFactory,node);
+		
 		node.boot(bootaddress);
 
 		// the node may require sending several messages to fully boot into the
@@ -110,24 +117,9 @@ public class Principal {
 		}
 
 		System.out.println("Finished creating new node " + node);
-
-	    // send directly to my leafset
-	    LeafSet leafSet = node.getLeafSet();
-	    
-	    // this is a typical loop to cover your leafset.  Note that if the leafset
-	    // overlaps, then duplicate nodes will be sent to twice
-	    for (int i=-leafSet.ccwSize(); i<=leafSet.cwSize(); i++) {
-	      if (i != 0) { // don't send to self
-	        // select the item
-	        NodeHandle nh = leafSet.get(i);
-	        
-	        // send the message directly to the node
-	        app.sendMyMsgDirect(nh);   
-	        
-	        // wait a sec
-	        env.getTimeSource().sleep(1000);
-	      }
-	    }
+		
+		mp.armazenar("/home/antonio/100_8367.jpg", null, null, null);
+		
 		
 	}
 

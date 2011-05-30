@@ -8,7 +8,7 @@ public class Main
 	    FileManager file;
 	    
 	    try {
-	    	file = new FileManager(args[0]);
+	    	file = new FileManager(args[0],4024 * 1024);
 	    	
 	    	file.breakFile();
 	    	file.finalize();
