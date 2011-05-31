@@ -1,7 +1,9 @@
 package com.ufpr.gdd;
 
 import java.util.Iterator;
+import java.util.Random;
 
+import com.sun.org.apache.xml.internal.resolver.Catalog;
 import com.ufpr.gdd.file.FileManager;
 import com.ufpr.gdd.file.FileManagerException;
 
@@ -31,6 +33,12 @@ public class Manipulacao {
 		Id cId = null;
 		FileManager fm;
 		Iterator<String> segsIter;
+		Random rng = new Random();
+		
+		// O catalogo será o array de Ids do arquivo
+		Id catId = localFactory.buildRandomId(rng);
+		final Catalogo arquivo = new Catalogo(catId); 
+		
 		byte buffer[] = new byte[Conteudo.CONTENT_SIZE];
 		//  Aqui tentamos quebrar o arquivo.
 		try {
@@ -57,10 +65,13 @@ public class Manipulacao {
 			  
 			  // A função buildId(byte[]) não está funcionando. 
 			  // Ela gera Ids iguais para buffers distintos. Verificar a razão.
-			  cId = localFactory.buildId(buffer);
+			  cId = localFactory.buildId(buffer.toString());
 			  // Criação do conteúdo a ser inserido na DHT.
 			  cont = new Conteudo(cId, buffer);
-				  
+			  
+			  // Inserção deste conteúdo no nosso catálogo
+			  arquivo.addSegment(cId);
+			  
 			  // Tenta inserir o conteúdo gerado na DHT. A sua execução é assíncrona.
 			  pst.insert(cont, new Continuation<Boolean[], Exception>() {
 			        // the result is an Array of Booleans for each insert
@@ -80,6 +91,25 @@ public class Manipulacao {
 			        }
 			      });
 			}
+		
+		// Tentamos inserir então o catálogo na DHT
+		  pst.insert(arquivo, new Continuation<Boolean[], Exception>() {
+		        // the result is an Array of Booleans for each insert
+		        public void receiveResult(Boolean[] results) {          
+		          int numSuccessfulStores = 0;
+		          for (int ctr = 0; ctr < results.length; ctr++) {
+		            if (results[ctr].booleanValue()) 
+		              numSuccessfulStores++;
+		          }
+		          System.out.println(arquivo + " successfully stored at " + 
+		              numSuccessfulStores + " locations.");
+		        }
+		  
+		        public void receiveException(Exception result) {
+		          System.out.println("Error storing catalog"+arquivo);
+		          result.printStackTrace();
+		        }
+		      });
 		return true;
 	}
 }
