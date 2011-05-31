@@ -29,8 +29,7 @@ public class Manipulacao {
 	
 	public boolean armazenar(String path, String name, String descricao, String date) throws Exception
 	{
-		byte[] oldbuffer = null;
-		  Id teste = null;
+		Id cId = null;
 		FileManager fm;
 		Iterator<String> segsIter;
 		byte buffer[] = new byte[Conteudo.CONTENT_SIZE];
@@ -56,14 +55,12 @@ public class Manipulacao {
 					e.printStackTrace();
 					return false;
 			  }
-			  if ( teste != null && buffer != null )
-			  {
-				  System.out.println(localFactory.buildId(buffer).hashCode() == teste.hashCode());
-				  System.out.println("++"+ (buffer == oldbuffer)); 
-
-			  }
-			 cont = new Conteudo( teste = localFactory.buildId(buffer), buffer);
-			 oldbuffer = buffer;
+			  
+			  // A função buildId(byte[]) não está funcionando. 
+			  // Ela gera Ids iguais para buffers distintos. Verificar a razão.
+			  cId = localFactory.buildId(buffer);
+			  // Criação do conteúdo a ser inserido na DHT.
+			  cont = new Conteudo(cId, buffer);
 				  
 			  // Tenta inserir o conteúdo gerado na DHT. A sua execução é assíncrona.
 			  pst.insert(cont, new Continuation<Boolean[], Exception>() {

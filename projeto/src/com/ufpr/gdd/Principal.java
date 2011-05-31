@@ -89,7 +89,7 @@ public class Principal {
 
 		PastryNode node = factory.newNode();
 
-		PastryIdFactory idFactory = new PastryIdFactory(env);
+		PastryIdFactory idFactory = new rice.pastry.commonapi.PastryIdFactory(env);
 
 //		Aplicacao app = new Aplicacao(node, idFactory);
 		
