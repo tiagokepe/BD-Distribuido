@@ -2,7 +2,6 @@ package com.ufpr.gdd;
 
 import java.util.Iterator;
 
-import com.sun.corba.se.impl.orbutil.graph.Node;
 import com.ufpr.gdd.file.FileManager;
 import com.ufpr.gdd.file.FileManagerException;
 
