@@ -1,0 +1,21 @@
+Artigo 14:
+- Fala sobre o gerenciamento de transações em uma rede P2P, pela introdução
+parece que propõe um gerenciador de transação global. Achei interessante o
+assunto, mas no artigo tem algumas fórmulas e algoritmos que parecem
+difícies de entender.
+
+Artigo 18:
+- Fala sobre gerenciamento de transações, ele implementa um protocolo para
+fazer para assegurar o controlo de concorrência e recuperação, ele não
+envolve um gerenciador globol, sua idédia consiste num grafo de
+serialização. Parece meio difícil de entender, acho que o assunto é difícil
+mesmo.
+
+
+Artigo 28:
+- Fala sobre controle global de acesso, aborda duas alternativas para isso: 
+A primeira abordagem é baseada em mapeamentos. A segunda abordagem
+estabelece um diretório de controle distribuído de acesso, nele são
+armazenadas as informações de acesso. Depois ele faz um comparative entre as
+duas abordagens. Pelo que vi o artigo parece ser mais facil de ler.
+
