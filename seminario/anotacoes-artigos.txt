@@ -19,3 +19,9 @@ estabelece um diretório de controle distribuído de acesso, nele são
 armazenadas as informações de acesso. Depois ele faz um comparative entre as
 duas abordagens. Pelo que vi o artigo parece ser mais facil de ler.
 
+Artigo 29:
+- Outro artigo sobre controle de acesso. Neste artigo ele propõe somente um esquema. Ele fala de sua importância para grids computacionais.
+
+Artigo 27:
+- Disponível pra quem quiser desembolsar US$25 nele. Não achamos uma cópia disso ainda. 
+
