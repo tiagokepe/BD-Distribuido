@@ -1,0 +1,35 @@
+<Rule RuleId="export:ethz" Effect="Permit">
+  <!--
+  <Grantor>
+    <Subject>
+      <SubjectMatch MatchId="&function;rfc822Name-equal">
+	<AttributeValue
+	  DataType="&datatype;rfc822Name">admin@ethz
+	</AttributeValue>
+	<SubjectAttributeDesignator
+	  AttributeId="&subject;subject-id"
+	DataType="&datatype;rfc822Name"/>
+      </SubjectMatch>
+    </Subject>
+  </Grantor>
+  <RuleGrantOption DataType="&xml;string">yes</RuleGrantOption>
+  <Timestamp></Timestamp>
+  -->
+    <Subject>
+      <SubjectMatch MatchId="&function;rfc822Name-equal">
+	<AttributeValue DataType="&datatype;rfc822Name">hans@ethz</AttributeValue>
+	           <!-- ... -->
+    </Subject>
+    <Resource>
+      <ResourceMatch MatchId="&function;anyURI-equal">
+	  <AttributeValue DataType="&xml;anyURI">ethz.object1</AttributeValue>
+	            <!-- ... -->
+      </ResourceMatch>
+    </Resource>
+    <Action>
+      <ActionMatch MatchId="&function;string-equal">
+	  <AttributeValue DataType="&xml;string">read</AttributeValue>
+	             <!-- ... -->
+      </ActionMatch>
+    </Action>
+</Rule>
