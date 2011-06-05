@@ -33,17 +33,33 @@
 \headcommand {\beamer@framepages {10}{10}}
 \headcommand {\slideentry {3}{1}{6}{11/11}{Controle de acesso local dos participantes}{0}}
 \headcommand {\beamer@framepages {11}{11}}
-\headcommand {\beamer@subsectionpages {6}{11}}
-\headcommand {\sectionentry {4}{Conclus\IeC {\~a}o}{12}{Conclus\IeC {\~a}o}{0}}
-\headcommand {\beamer@sectionpages {6}{11}}
-\headcommand {\beamer@subsectionpages {12}{11}}
-\headcommand {\sectionentry {5}{Perguntas}{12}{Perguntas}{0}}
-\headcommand {\beamer@sectionpages {12}{11}}
-\headcommand {\beamer@subsectionpages {12}{11}}
-\headcommand {\slideentry {5}{0}{1}{12/12}{}{0}}
+\headcommand {\slideentry {3}{1}{7}{12/12}{Controle de acesso local dos participantes}{0}}
 \headcommand {\beamer@framepages {12}{12}}
-\headcommand {\beamer@partpages {1}{12}}
-\headcommand {\beamer@subsectionpages {12}{12}}
-\headcommand {\beamer@sectionpages {12}{12}}
-\headcommand {\beamer@documentpages {12}}
-\headcommand {\def \inserttotalframenumber {12}}
+\headcommand {\slideentry {3}{1}{8}{13/13}{Controle de acesso local dos participantes}{0}}
+\headcommand {\beamer@framepages {13}{13}}
+\headcommand {\beamer@subsectionpages {6}{13}}
+\headcommand {\slideentry {3}{2}{1}{14/14}{P-Hera}{0}}
+\headcommand {\beamer@framepages {14}{14}}
+\headcommand {\slideentry {3}{2}{2}{15/15}{P-Hera}{0}}
+\headcommand {\beamer@framepages {15}{15}}
+\headcommand {\slideentry {3}{2}{3}{16/16}{P-Hera}{0}}
+\headcommand {\beamer@framepages {16}{16}}
+\headcommand {\slideentry {3}{2}{4}{17/17}{P-Hera}{0}}
+\headcommand {\beamer@framepages {17}{17}}
+\headcommand {\slideentry {3}{2}{5}{18/18}{P-Hera}{0}}
+\headcommand {\beamer@framepages {18}{18}}
+\headcommand {\sectionentry {4}{Conclus\IeC {\~a}o}{19}{Conclus\IeC {\~a}o}{0}}
+\headcommand {\beamer@sectionpages {6}{18}}
+\headcommand {\beamer@subsectionpages {14}{18}}
+\headcommand {\slideentry {4}{0}{6}{19/19}{}{0}}
+\headcommand {\beamer@framepages {19}{19}}
+\headcommand {\sectionentry {5}{Perguntas}{20}{Perguntas}{0}}
+\headcommand {\beamer@sectionpages {19}{19}}
+\headcommand {\beamer@subsectionpages {19}{19}}
+\headcommand {\slideentry {5}{0}{7}{20/20}{}{0}}
+\headcommand {\beamer@framepages {20}{20}}
+\headcommand {\beamer@partpages {1}{20}}
+\headcommand {\beamer@subsectionpages {20}{20}}
+\headcommand {\beamer@sectionpages {20}{20}}
+\headcommand {\beamer@documentpages {20}}
+\headcommand {\def \inserttotalframenumber {20}}

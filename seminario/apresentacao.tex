@@ -7,7 +7,7 @@
 \usepackage{fix-cm}
 \usepackage{graphicx}
 \usepackage{listings}
-
+\usepackage{multicol}
 \usepackage{wrapfig}
 \usepackage{indentfirst}
 \usepackage{float}
@@ -126,13 +126,112 @@
     \end{itemize}
 
   \end{frame}
-
+  
+  \begin{frame}{Proteção do diretório e conteúdo distribuído}
+    \begin{itemize}
+     \item Cada entrada possui uma assinatura
+     \item Criptografia das entradas do diretório
+     \begin{itemize}
+      \item Cada objeto corresponde a uma chave pública
+      \item Chaves privadas são distribuídas
+     \end{itemize}
+     \item Somente o concessor pode alterar suas entradas
+     \item Detecção de peers maliciosos
+    \end{itemize}
+   
+  \end{frame}
+  
+  \begin{frame}{Considerações}
+   \begin{itemize}
+    \item Mapeamento
+    \begin{itemize}
+     \item Tende a criar muitas regras
+     \item Mais controle
+    \end{itemize}
+    \item Diretório distribuído
+    \begin{itemize}
+     \item Política de remoção de entradas do diretório
+    \end{itemize}
+   \end{itemize}
+  \end{frame}
 
 
 \subsection{P-Hera}
+  \begin{frame}{Contexto}
+   \begin{itemize}
+    \item Rede não-estruturada hierárquica
+    \item Primitivas: \textit{search}, \textit{get} e \textit{place}.
+   \end{itemize}
+   \begin{figure}[H]
+      \includegraphics[scale=0.25]{phera_fig1.png}
+   \end{figure}
+
+  \end{frame}
+  
+  \begin{frame}{Políticas}
+   \begin{itemize}
+    \item Em XACML
+    \item Tipos:
+    \begin{itemize}
+     \item Política de replicação
+     \item Política de armazenamento
+     \item Controle de acesso
+    \end{itemize}
+   \end{itemize}
+   \begin{figure}[H]
+    \includegraphics[scale=0.25]{phera_fig2.png}
+   \end{figure}
+
+  \end{frame}
+  
+  \begin{frame}{Gerenciamento de políticas}
+   \begin{itemize}
+    \item Armazenamento no supernodo
+    \item Organização
+    \begin{itemize}
+     \item Sem grupamento
+     \item Agrupados por políticas
+     \item Agrupados por expressões em políticas: $< attr_{i}, expr_{i} >$
+    \end{itemize}
+
+   \end{itemize}
+  \end{frame}
+  
+  \begin{frame}{Testes}
+  \begin{multicols}{2}
+    \begin{figure}[H]
+     \includegraphics[scale=0.2]{phera_fig3.png}
+    \end{figure}
+    \begin{figure}[H]
+     \includegraphics[scale=0.2]{phera_fig4.png}
+    \end{figure}
+  \end{multicols}
+  \end{frame}
+  
+  
+  \begin{frame}{Considerações}
+   \begin{itemize}
+    \item Preza escalabilidade
+    \item Confiança em supernodos
+   \end{itemize}
+   
+
+  \end{frame}
+
+
+
+
 
 
 \section{Conclusão}
+  \begin{frame}{Conclusão}
+    \begin{itemize}
+     \item Propostas para contextos específicos
+     \item Tráfego extra para estabelecimento de regras
+     \item Estabelecimento de confiança entre peers
+    \end{itemize}
+
+  \end{frame}
 
 
 \section{Perguntas}

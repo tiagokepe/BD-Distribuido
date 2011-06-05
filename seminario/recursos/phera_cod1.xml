@@ -1,0 +1,31 @@
+<Policy PolicyId="Example_of_ Hosting _Policy" RuleCombiningAlgId="deny -overrides">
+  <Description>XACML Policy composed by 2 policy rules</Description>
+  <Target>
+    <Subjects>
+      <AnySubject />
+    </Subjects>
+    <Resources>
+      <AnyResource />
+    </Resources>
+    <Actions>
+      <Write />
+    </Actions>
+  </Target>
+  <Rule RuleId="Condition_On_ Affiliation" Effect="Permit">
+    <Condition FunctionId=" function:string -equal">
+      <Apply FunctionId="function:string -one-and-only">
+        <SubjectAttributeDesignator AttributeId="Affiliation" DataType=" #string" />
+      </Apply>
+      <AttributeValue DataType="#string">Unimi</AttributeValue>
+    </Condition>
+  </Rule>
+  <Rule RuleId="Condition_On_ Time" Effect="Deny">
+    <Condition FunctionId=" function#time-in-range">
+      <Apply FunctionId=" function:time-one-and-only">
+        <EnvironmentAttributeDesignator AttributeId="current -time" DataType="#time" />
+      </Apply>
+      <AttributeValue DataType=" #time">08:00:00</AttributeValue>
+      <AttributeValue DataType=" #time">20:00:00</AttributeValue>
+    </Condition>
+  </Rule>
+</Policy>
