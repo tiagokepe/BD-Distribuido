@@ -1,0 +1,32 @@
+<Policy PolicyId="SamplePolicy"
+          RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:permit-overrides">
+
+	<!-- ... -->
+
+    <Rule RuleId="LoginRule" Effect="Permit">
+      <Target>
+        <Subjects>
+          <AnySubject/>
+        </Subjects>
+        <Resources>
+          <AnyResource/>
+        </Resources>
+        <Actions>
+          <ActionMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+            <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">login</AttributeValue>
+            <ActionAttributeDesignator DataType="http://www.w3.org/2001/XMLSchema#string"
+                                       AttributeId="ServerAction"/>
+          </ActionMatch>
+        </Actions>
+      </Target>
+      <Condition FunctionId=" function#time-in-range">
+          <Apply FunctionId=" function:time-one-and-only">
+            <EnvironmentAttributeDesignator AttributeId="current -time" DataType="#time" />
+          </Apply>
+          <AttributeValue DataType=" #time">08:00:00</AttributeValue>
+          <AttributeValue DataType=" #time">20:00:00</AttributeValue>
+      </Condition>
+    </Rule>
+    <Rule RuleId="FinalRule" Effect="Deny"/>
+</Policy>
+

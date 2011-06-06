@@ -163,7 +163,6 @@
   \begin{frame}{Considerações}
    \begin{itemize}
     \item Na Alteração de algum previlégio, pode ocorrer o efeito de cascata
-    \item Não tem replicação
     \item Mapeamento
     \begin{itemize}
      \item Tende a criar muitas regras

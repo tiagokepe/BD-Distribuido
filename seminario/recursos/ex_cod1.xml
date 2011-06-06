@@ -1,0 +1,21 @@
+<Policy PolicyId="SamplePolicy"
+          RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:permit-overrides">
+    <Target>
+      <Subjects>
+        <AnySubject/>
+      </Subjects>
+      <Resources>
+        <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+          <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">SampleServer</AttributeValue>
+          <ResourceAttributeDesignator DataType="http://www.w3.org/2001/XMLSchema#string"
+                                       AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id"/>
+        </ResourceMatch>
+      </Resources>
+      <Actions>
+        <AnyAction/>
+      </Actions>
+    </Target>
+
+	<!-- ... -->
+  </Policy>
+

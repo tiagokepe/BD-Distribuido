@@ -1,4 +1,4 @@
-This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2011.5.25)  5 JUN 2011 18:13
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2010.7.1)  6 JUN 2011 15:47
 entering extended mode
  %&-line parsing enabled.
 **apresentacao.tex
@@ -1077,20 +1077,12 @@ LaTeX Font Warning: Font shape `OT1/cmss/m/it' in size <14.4> not available
 
 ] [5
 
-] [6
-
-] <recursos/demap_fig1.png, id=273, 706.64pt x 414.54875pt>
-File: recursos/demap_fig1.png Graphic file (type png)
-
-<use recursos/demap_fig1.png> [7
-
- <./recursos/demap_fig1.png (PNG copy)>]
-(/usr/share/texmf/tex/latex/listings/lstlang1.sty
+] (/usr/share/texmf/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2004/09/05 1.3 listings language file
 )
 (/usr/share/texmf/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2004/09/07 1.3 (Carsten Heinz)
-) (./recursos/demap_cod1.xml
+) (./recursos/ex_cod1.xml
 LaTeX Font Info:    Try loading font information for OML+cmss on input line 1.
 LaTeX Font Info:    No file OMLcmss.fd. on input line 1.
 
@@ -1098,10 +1090,6 @@ LaTeX Font Info:    No file OMLcmss.fd. on input line 1.
 LaTeX Font Warning: Font shape `OML/cmss/m/n' undefined
 (Font)              using `OML/cmm/m/it' instead
 (Font)              for symbol `textless' on input line 1.
-
-
-LaTeX Font Warning: Font shape `OT1/cmss/m/it' in size <6> not available
-(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 2.
 
 LaTeX Font Info:    Try loading font information for U+msa on input line 2.
 (/usr/share/texmf/tex/latex/amsfonts/umsa.fd
@@ -1113,97 +1101,113 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 2.
 File: umsb.fd 2002/01/19 v2.2g AMS font definitions
 )
 
+LaTeX Font Warning: Font shape `OT1/cmss/m/it' in size <6> not available
+(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 2.
+
+
 LaTeX Font Warning: Font shape `OT1/cmss/m/it' in size <5> not available
 (Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 2.
 
-)
-Overfull \vbox (2.99097pt too high) detected at line 98
+
+Overfull \hbox (25.935pt too wide) in paragraph at lines 9--10
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[8
+) [6
 
-] <recursos/demap_fig2_mp.png, id=335, 917.4275pt x 383.4325pt>
-File: recursos/demap_fig2_mp.png Graphic file (type png)
-
-<use recursos/demap_fig2_mp.png>
-Overfull \hbox (22.98378pt too wide) in paragraph at lines 107--107
- [] 
+] (./recursos/ex_cod2.xml
+Overfull \hbox (8.56805pt too wide) in paragraph at lines 16--17
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[9
+) [7
 
- <./recursos/demap_fig2_mp.png (PNG copy)>]
-<recursos/demap_fig3_dd.png, id=369, 905.3825pt x 379.4175pt>
-File: recursos/demap_fig3_dd.png Graphic file (type png)
+] [8
 
-<use recursos/demap_fig3_dd.png>
-Overfull \hbox (18.64758pt too wide) in paragraph at lines 116--116
- [] 
+] <recursos/demap_fig1.png, id=320, 706.64pt x 414.54875pt>
+File: recursos/demap_fig1.png Graphic file (type png)
+
+<use recursos/demap_fig1.png> [9
+
+ <./recursos/demap_fig1.png (PNG copy)>]
+(./recursos/demap_cod1.xml)
+Overfull \vbox (2.99097pt too high) detected at line 116
  []
 
 [10
 
+] <recursos/demap_fig2_mp.png, id=378, 917.4275pt x 383.4325pt>
+File: recursos/demap_fig2_mp.png Graphic file (type png)
+
+<use recursos/demap_fig2_mp.png> [11
+
+ <./recursos/demap_fig2_mp.png (PNG copy)>] <recursos/demap_fig3_dd.png, id=411
+, 905.3825pt x 379.4175pt>
+File: recursos/demap_fig3_dd.png Graphic file (type png)
+
+<use recursos/demap_fig3_dd.png> [12
+
  <./recursos/demap_fig3_dd.png (PNG copy)>]
 
 LaTeX Font Warning: Font shape `OT1/cmss/m/it' in size <10> not available
-(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 128.
+(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 146.
 
 
-[11
+[13
 
-] [12
+] [14
 
-] [13
+] [15
 
 ]
 
 LaTeX Font Warning: Font shape `OT1/cmss/m/it' in size <10.95> not available
-(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 169.
+(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 191.
 
 
-<recursos/phera_fig1.png, id=505, 637.38126pt x 492.84125pt>
+<recursos/phera_fig1.png, id=543, 637.38126pt x 492.84125pt>
 File: recursos/phera_fig1.png Graphic file (type png)
 
-<use recursos/phera_fig1.png> [14
+<use recursos/phera_fig1.png> [16
 
  <./recursos/phera_fig1.png (PNG copy)>]
-<recursos/phera_fig2.png, id=539, 642.4pt x 318.18875pt>
+<recursos/phera_fig2.png, id=576, 642.4pt x 318.18875pt>
 File: recursos/phera_fig2.png Graphic file (type png)
 
-<use recursos/phera_fig2.png> [15
+<use recursos/phera_fig2.png> [17
 
  <./recursos/phera_fig2.png (PNG copy)>]
 
 LaTeX Font Warning: Font shape `OT1/cmss/m/it' in size <7> not available
-(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 198.
+(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 219.
 
 
-[16
+[18
 
-] <recursos/phera_fig3.png, id=607, 764.8575pt x 409.53pt>
+] <recursos/phera_fig3.png, id=642, 764.8575pt x 409.53pt>
 File: recursos/phera_fig3.png Graphic file (type png)
 
 <use recursos/phera_fig3.png>
-Overfull \hbox (4.32385pt too wide) in paragraph at lines 209--209
+Overfull \hbox (4.32385pt too wide) in paragraph at lines 231--231
  [] 
  []
 
-<recursos/phera_fig4.png, id=608, 753.81625pt x 416.55624pt>
+<recursos/phera_fig4.png, id=643, 753.81625pt x 416.55624pt>
 File: recursos/phera_fig4.png Graphic file (type png)
 
 <use recursos/phera_fig4.png>
-Overfull \hbox (2.11565pt too wide) in paragraph at lines 209--209
+Overfull \hbox (2.11565pt too wide) in paragraph at lines 231--231
  [] 
  []
 
-[17
+[19
 
  <./recursos/phera_fig3.png (PNG copy)> <./recursos/phera_fig4.png (PNG copy)>]
- [18
+ [20
 
-] [19
+] [21
 
-] [20
+] [22
 
 ]
 \tf@nav=\write5
@@ -1221,13 +1225,13 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 11115 strings out of 256216
- 190023 string characters out of 1917072
- 286153 words of memory out of 1500000
- 14020 multiletter control sequences out of 10000+200000
+ 11142 strings out of 256216
+ 190469 string characters out of 1917073
+ 289153 words of memory out of 1500000
+ 14039 multiletter control sequences out of 10000+200000
  12048 words of font info for 44 fonts, out of 1200000 for 2000
  645 hyphenation exceptions out of 8191
- 41i,20n,70p,347b,1461s stack positions out of 5000i,500n,6000p,200000b,15000s
+ 41i,20n,70p,347b,1466s stack positions out of 5000i,500n,6000p,200000b,15000s
 </usr/share/texmf/fonts/type1/bluesky/cm/cmmi10.pfb></usr/share/texmf/fonts/t
 ype1/bluesky/cm/cmmi6.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmss10.pfb><
 /usr/share/texmf/fonts/type1/bluesky/cm/cmss12.pfb></usr/share/texmf/fonts/type
@@ -1236,9 +1240,9 @@ r/share/texmf/fonts/type1/bluesky/cm/cmss9.pfb></usr/share/texmf/fonts/type1/bl
 uesky/cm/cmssi10.pfb></usr/share/texmf/fonts/type1/bluesky/cm/cmssi12.pfb></usr
 /share/texmf/fonts/type1/bluesky/cm/cmssi8.pfb></usr/share/texmf/fonts/type1/bl
 uesky/cm/cmsy6.pfb>
-Output written on apresentacao.pdf (20 pages, 593196 bytes).
+Output written on apresentacao.pdf (22 pages, 601865 bytes).
 PDF statistics:
- 784 PDF objects out of 1000 (max. 8388607)
- 49 named destinations out of 1000 (max. 131072)
+ 815 PDF objects out of 1000 (max. 8388607)
+ 51 named destinations out of 1000 (max. 131072)
  188 words of extra memory for PDF output out of 10000 (max. 10000000)
 
