@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Defina aqui o nome de seu repositório:
-REPOSITORIO=antonio
+REPOSITORIO=kepe
 
 git checkout master
 git pull
