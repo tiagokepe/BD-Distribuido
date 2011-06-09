@@ -1,10 +1,14 @@
 package com.ufpr.gdd;
 
+import java.io.BufferedOutputStream;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+
+import org.mpisws.p2p.transport.util.FileOutputBuffer;
 
 import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 import com.sun.org.apache.xml.internal.resolver.Catalog;
@@ -22,11 +26,12 @@ import rice.pastry.commonapi.PastryIdFactory;
 
 public class Manipulacao {
 	
-	
 	private Past pst;
 	private Environment env;
 	private PastryIdFactory localFactory;
 	private PastryNode node;
+	private String baseDir = new String("/tmp");
+	
 	public Manipulacao(Past pst, Environment env, PastryIdFactory pif, PastryNode node) {
 		this.pst = pst;
 		this.env = env;
@@ -35,7 +40,7 @@ public class Manipulacao {
 	}
 	
 	// Recebe a descrição de um arquivo, cataloga e armazena ele. */
-	public boolean armazenar(String path, String title, String subject, String description, Date date ) throws Exception
+	public void armazenar(String path, String title, String subject, String description, Date date ) throws Exception
 	{
 		Id cId = null;
 		FileManager fm;
@@ -46,7 +51,7 @@ public class Manipulacao {
 		
 		// Geramos uma id única para este catálogo
 		Id catId = localFactory.buildId(title+subject+description);
-		final Catalogo arquivo = new Catalogo(catId, title, subject, description, date); 
+		final Catalogo arquivo = new Catalogo(catId, path.substring(path.lastIndexOf("/") + 1), title, subject, description, date); 
 		
 		byte buffer[] = new byte[Conteudo.CONTENT_SIZE];
 		//  Aqui tentamos quebrar o arquivo.
@@ -56,8 +61,7 @@ public class Manipulacao {
 			segsIter = fm.getSegments().iterator();
 			fm.finalize();
 		} catch (FileManagerException e) {
-			e.printStackTrace();
-			return false;
+			throw new Exception(e.getMessage());
 		}
 			
 		// Inserimos cada segmento na DHT.
@@ -68,9 +72,10 @@ public class Manipulacao {
 				  String segname = segsIter.next();
 				  buffer = fm.getContent(segname);
 			  }catch( FileManagerException e){
-					e.printStackTrace();
-					return false;
+				  throw new Exception(e.getMessage());
 			  }
+			  
+			  
 			  
 			  // A função buildId(byte[]) não está funcionando. 
 			  // Ela gera Ids iguais para buffers distintos. Verificar a razão.
@@ -112,12 +117,12 @@ public class Manipulacao {
 			ref.addCatalog(catId);
 			storeObject(ref);
 		}
-		
-		
-		return true;
 	}
-	// Lida com referẽncias
-	// Se a referência for achada na DHT, será retornada, senão uma nova será criada.
+ 
+	/**
+	 * Lida com referẽncias
+	 * Se a referência for achada na DHT, será retornada, senão uma nova será criada.
+	 */
 	private Referencia handleReference(String refStr) {
 		Referencia ref = null;
 		
@@ -179,8 +184,10 @@ public class Manipulacao {
 		
 		return lookupContent;
 	}
-	
-	// Retorna uma lista de catálogos que satisfazem a uma busca
+
+	/**
+	 * Retorna uma lista de catálogos que satisfazem a uma busca
+	 */
 	public boolean buscar(String term) throws ManipulacaoException{
 		
 		
@@ -218,26 +225,51 @@ public class Manipulacao {
 		
 		return true;
 	}
-	// Faz uma cópia no diretório da máquina local do arquivo referenciado pelo catálogo
+	
+	/**
+	 * Faz uma cópia no diretório da máquina local do arquivo referenciado pelo catálogo
+	 * 
+	 * @param cat
+	 * 		Referencia para as partes do arquivo na DHT
+	 * @throws ManipulacaoException
+	 * 		
+	 */
 	private void downloadFile(Catalogo cat) throws ManipulacaoException{
 		
 		List<Id> segIds = cat.getSegments();
-		Iterator<Id> iterator= segIds.iterator();
-		
-		
-		while ( iterator.hasNext() ) {
+		Iterator<Id> iterator = segIds.iterator();
+		byte[] buffer = new byte[Conteudo.CONTENT_SIZE];
+		BufferedOutputStream output = null;
+
+		try {
+			output = new BufferedOutputStream(new FileOutputBuffer(this.baseDir + "/" + cat.getNameFile()));
 			
-			Id segId = iterator.next();
-			
-			Conteudo seg = (Conteudo) getObject(segId);
-			
-			if ( seg == null )
-				throw new ManipulacaoException("O arquivo contém segmentos corrompidos.");
-			
-			//seg.
+			while (iterator.hasNext()) {
+
+				Id segId = iterator.next();
+
+				Conteudo seg = (Conteudo) getObject(segId);
+
+				if (seg == null)
+					throw new ManipulacaoException(
+							"O arquivo contém segmentos corrompidos.");
+
+				output.write(seg.getBuffer(), 0, seg.getBuffer().length);
+				output.flush();
+			}
+		} catch (Exception e) {
+			throw new ManipulacaoException(
+					"Não foi possível escrever o arquivo no em " + this.baseDir
+							+ ". " + e.getMessage());
+		} finally {
+			try {
+				output.flush();
+				if (output != null)
+					output.close();
+			} catch (Exception e) {
+				
+			}
 		}
-		
-		
 	}
 
 	private boolean confirmFile() {
@@ -245,7 +277,7 @@ public class Manipulacao {
 		
 		String str = sc.nextLine();
 		
-		if ( str.charAt(0) == 'Y' || str.charAt(0) == 'y' ) return true;
+		if ( str.equalsIgnoreCase("Y") || str.equalsIgnoreCase("S") ) return true;
 		
 		return false;
 	}

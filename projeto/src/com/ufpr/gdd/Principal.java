@@ -39,6 +39,9 @@ package com.ufpr.gdd;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
+
+import com.ufpr.gdd.view.View;
+
 import rice.Continuation;
 import rice.environment.Environment;
 import rice.p2p.commonapi.Id;
@@ -56,8 +59,8 @@ import rice.persistence.*;
  * 
  * @author Jeff Hoye
  */
-public class Principal {
-
+public class Principal 
+{
 	// this will keep track of our applications
 	Aplicacao apps;
 
@@ -77,7 +80,7 @@ public class Principal {
 	 * @param useDirect
 	 *            true for the simulator, false for the socket protocol
 	 */
-	public Principal(int bindport, InetSocketAddress bootaddress,
+	public Manipulacao createManipulator(int bindport, InetSocketAddress bootaddress,
 			Environment env) throws Exception {
 
 		// Generate the NodeIds Randomly
@@ -90,9 +93,6 @@ public class Principal {
 		PastryNode node = factory.newNode();
 
 		PastryIdFactory idFactory = new rice.pastry.commonapi.PastryIdFactory(env);
-
-//		Aplicacao app = new Aplicacao(node, idFactory);
-		
 		
 		Storage stor = new MemoryStorage(idFactory);
 		Past pst = new PastImpl(node, new StorageManagerImpl(idFactory, stor, new LRUCache( new MemoryStorage(idFactory), 512 * 1024, node.getEnvironment())), 0, "");
@@ -116,13 +116,14 @@ public class Principal {
 			}
 		}
 
-		System.out.println("Finished creating new node " + node);
+		/**System.out.println("Finished creating new node " + node);
 		
 		mp.armazenar("/home/bcc/acsfj08/tracegraph202linux.tar.gz", "lol", null, null, null);
 		
 		
-		mp.buscar("lol");
+		mp.buscar("lol");*/
 		
+		return mp;	
 	}
 
 	/**
@@ -134,7 +135,7 @@ public class Principal {
 	 * example java rice.Principal.DistPrincipal 9001 pokey.cs.almamater.edu
 	 * 9001 10 example java rice.Principal.DistPrincipal -direct 10
 	 */
-	public static void main(String[] args) throws Exception {
+	public static Manipulacao mainP2P(String[] args) throws Exception {
 		try {
 
 			// Loads pastry settings
@@ -157,8 +158,8 @@ public class Principal {
 			int bootport = Integer.parseInt(args[2]);
 			bootaddress = new InetSocketAddress(bootaddr, bootport);
 
-			// launch our node!
-			new Principal(bindport, bootaddress, env);
+			// launch our node!			
+			return new Principal().createManipulator(bindport, bootaddress, env);
 		} catch (Exception e) {
 			// remind user how to use
 			System.out.println("Usage:");
@@ -174,5 +175,17 @@ public class Principal {
 					.println("example java rice.Principal.DistPrincipal -direct 10");
 			throw e;
 		}
+	}
+	
+	public static void main(String[] args) throws Exception {
+		View view = new View();
+		
+		try {
+			view.run(args);
+		} catch (Exception e){
+			System.out.println("Sistema finalizado com erro. "+e.getMessage());
+		}
+		
+		System.exit(0);
 	}
 }

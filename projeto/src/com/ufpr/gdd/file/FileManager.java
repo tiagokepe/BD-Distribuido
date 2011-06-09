@@ -14,7 +14,6 @@ import java.util.List;
  * Recebe um arquivo e quebra o mesmo em vários pedaço de 256 KB.
  * Cada parte, é jogada no /tmp da máquina.
  * 
- * @author roger
  *
  */
 public class FileManager
@@ -101,25 +100,31 @@ public class FileManager
 		
 		File f = new File(path);
 		byte buffer[] = new byte[SEG_SIZE];
+		byte buff[] = null;
 		
 		try {
-			BufferedInputStream bf = new BufferedInputStream(new FileInputStream(file));
-			bf.read(buffer);
+			BufferedInputStream bf = new BufferedInputStream(new FileInputStream(path));
+			int size = bf.read(buffer);
+			
+			buff = new byte[size];
+			copy(buffer, buff);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			throw new FileManagerException("Erro ao tentar abir um segmento. " + e.getMessage());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			throw new FileManagerException("Você não tem permissão de leitura." + e.getMessage());
 		}
 		
-		return buffer;
+		return buff;
 
 	}
 	
 	public List<String> getSegments() {
 		return this.segments;
+	}
+	
+	public void copy (byte [] from, byte [] to){
+		for (int i = 0; i < to.length; i++){
+			to[i] = from[i];
+		}
 	}
 }
