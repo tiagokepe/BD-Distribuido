@@ -7,19 +7,19 @@ import rice.p2p.past.ContentHashPastContent;
 
 public class Referencia extends ContentHashPastContent {
 
-	private java.util.List<Catalogo> files;
+	private java.util.List<Id> catId;
 	
 	public Referencia(Id myId) {
 		super(myId);
-		files = new ArrayList<Catalogo>();
+		catId = new ArrayList<Id>();
 	}
 	
-	public void addCatalog(Catalogo newEntry) {
-		files.add(newEntry);
+	public void addCatalog(Id newEntry) {
+		catId.add(newEntry);
 	}
 	
-	public List<Catalogo> returnCatalogos(){
-		return files;
+	public List<Id> returnCatalogos(){
+		return catId;
 	}
 
 }

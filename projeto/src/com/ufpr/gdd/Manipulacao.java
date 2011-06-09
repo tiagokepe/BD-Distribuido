@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Random;
 
+import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 import com.sun.org.apache.xml.internal.resolver.Catalog;
 import com.ufpr.gdd.file.FileManager;
 import com.ufpr.gdd.file.FileManagerException;
@@ -13,6 +14,7 @@ import rice.environment.Environment;
 import rice.p2p.commonapi.Id;
 import rice.p2p.past.ContentHashPastContent;
 import rice.p2p.past.Past;
+import rice.p2p.past.PastContent;
 import rice.pastry.PastryNode;
 import rice.pastry.commonapi.PastryIdFactory;
 
@@ -84,10 +86,42 @@ public class Manipulacao {
 		// Tentamos inserir então o catálogo na DHT
 		  storeObject(arquivo);
 		  
-		  
-		 // handleReferences(arquivo);
+		 // Precisamos então lidar com as referências a este catálogo
+		// Referência de títulos
+		Referencia ref = handleReference(title);
+		ref.addCatalog(catId);
+		storeObject(ref);
+		
+		
+		// Referência de assunto
+		ref = handleReference(subject);
+		ref.addCatalog(catId);
+		storeObject(ref);
+		
+		// Referência de descrição
+		ref = handleReference(description);
+		ref.addCatalog(catId);
+		storeObject(ref);
+		
+		
 		return true;
 	}
+	// Lida com referẽncias
+	// Se a referência for achada na DHT, será retornada, senão uma nova será criada.
+	private Referencia handleReference(String refStr) {
+		Referencia ref;
+		
+		Id refId = localFactory.buildId(refStr);
+		
+		ref = (Referencia) getObject(refId);
+		
+		if ( ref == null) {
+			ref = new Referencia(refId);
+		}
+		
+		return ref;
+	}
+
 	/* Armazena um objeto na DHT. A sua execução é assíncrona. */
 	private void storeObject( final ContentHashPastContent obj) {
 		 pst.insert(obj, new Continuation<Boolean[], Exception>() {
@@ -107,5 +141,23 @@ public class Manipulacao {
 		          result.printStackTrace();
 		        }
 		      });
+	}
+	private PastContent getObject(final Id lookupKey){
+		
+		PastContent lookupContent;
+		
+	    LookupContinuation lck = new LookupContinuation();
+		pst.lookup(lookupKey,lck);
+		
+		synchronized (lck) {
+			try {
+				lck.wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			lookupContent = lck.getVal();
+		}
+		
+		return lookupContent;
 	}
 }
