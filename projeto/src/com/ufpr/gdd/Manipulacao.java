@@ -2,7 +2,9 @@ package com.ufpr.gdd;
 
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 import com.sun.org.apache.xml.internal.resolver.Catalog;
@@ -43,7 +45,7 @@ public class Manipulacao {
 		// O catalogo terá o array de Ids do arquivo
 		
 		// Geramos uma id única para este catálogo
-		Id catId = localFactory.buildId(title+subject+description+date.toString());
+		Id catId = localFactory.buildId(title+subject+description);
 		final Catalogo arquivo = new Catalogo(catId, title, subject, description, date); 
 		
 		byte buffer[] = new byte[Conteudo.CONTENT_SIZE];
@@ -88,20 +90,28 @@ public class Manipulacao {
 		  
 		 // Precisamos então lidar com as referências a este catálogo
 		// Referência de títulos
-		Referencia ref = handleReference(title);
-		ref.addCatalog(catId);
-		storeObject(ref);
+		Referencia ref;
+		
+		if ( title != null ) {
+			ref = handleReference(title);
+			ref.addCatalog(catId);
+			storeObject(ref);
+		}
 		
 		
 		// Referência de assunto
-		ref = handleReference(subject);
-		ref.addCatalog(catId);
-		storeObject(ref);
+		if ( subject != null ) {
+			ref = handleReference(subject);
+			ref.addCatalog(catId);
+			storeObject(ref);
+		}
 		
 		// Referência de descrição
-		ref = handleReference(description);
-		ref.addCatalog(catId);
-		storeObject(ref);
+		if ( description != null ) {
+			ref = handleReference(description);
+			ref.addCatalog(catId);
+			storeObject(ref);
+		}
 		
 		
 		return true;
@@ -109,7 +119,10 @@ public class Manipulacao {
 	// Lida com referẽncias
 	// Se a referência for achada na DHT, será retornada, senão uma nova será criada.
 	private Referencia handleReference(String refStr) {
-		Referencia ref;
+		Referencia ref = null;
+		
+		
+		if ( refStr == null ) return null;
 		
 		Id refId = localFactory.buildId(refStr);
 		
@@ -124,6 +137,9 @@ public class Manipulacao {
 
 	/* Armazena um objeto na DHT. A sua execução é assíncrona. */
 	private void storeObject( final ContentHashPastContent obj) {
+		
+		if ( obj == null) return;
+		
 		 pst.insert(obj, new Continuation<Boolean[], Exception>() {
 		        // the result is an Array of Booleans for each insert
 		        public void receiveResult(Boolean[] results) {          
@@ -142,6 +158,7 @@ public class Manipulacao {
 		        }
 		      });
 	}
+	// Busca um objeto na DHT com base em uma chave
 	private PastContent getObject(final Id lookupKey){
 		
 		PastContent lookupContent;
@@ -150,14 +167,86 @@ public class Manipulacao {
 		pst.lookup(lookupKey,lck);
 		
 		synchronized (lck) {
-			try {
-				lck.wait();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+			if( ! lck.isReady() ) {
+				try {
+					lck.wait();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 			lookupContent = lck.getVal();
 		}
 		
 		return lookupContent;
+	}
+	
+	// Retorna uma lista de catálogos que satisfazem a uma busca
+	public boolean buscar(String term) throws ManipulacaoException{
+		
+		
+		
+		// Buscamos a referência correspondente ao nosso termo
+		Referencia ref;
+		
+		Id refId = localFactory.buildId(term);
+		ref = (Referencia) getObject(refId);
+		
+		// Se não há nenhuma referência,  então este arquivo não existe
+		if ( ref == null ) {
+			throw new ManipulacaoException("A sua busca não retornou resultados");
+		}
+		
+		
+		// Buscamos todos os catálogos referenciados,
+		// por exemplo publicações de mesma data, ou com mesmo título
+		List<Id> catIds = ref.returnCatalogos();
+		Iterator<Id> iterator = catIds.iterator();
+		
+		System.out.println("Sua busca retornou "+ catIds.size() +" resultado(s).");
+		
+		while ( iterator.hasNext() ){
+			Id arqId = iterator.next();
+			Catalogo arq = (Catalogo) getObject(arqId);
+			arq.printFileInfo();
+			
+			System.out.println("Este é o arquivo desejado? (S/N) ");
+			if ( confirmFile() ){
+				downloadFile(arq);
+				break;
+			}
+		}
+		
+		return true;
+	}
+	// Faz uma cópia no diretório da máquina local do arquivo referenciado pelo catálogo
+	private void downloadFile(Catalogo cat) throws ManipulacaoException{
+		
+		List<Id> segIds = cat.getSegments();
+		Iterator<Id> iterator= segIds.iterator();
+		
+		
+		while ( iterator.hasNext() ) {
+			
+			Id segId = iterator.next();
+			
+			Conteudo seg = (Conteudo) getObject(segId);
+			
+			if ( seg == null )
+				throw new ManipulacaoException("O arquivo contém segmentos corrompidos.");
+			
+			//seg.
+		}
+		
+		
+	}
+
+	private boolean confirmFile() {
+		Scanner sc = new Scanner(System.in);
+		
+		String str = sc.nextLine();
+		
+		if ( str.charAt(0) == 'Y' || str.charAt(0) == 'y' ) return true;
+		
+		return false;
 	}
 }

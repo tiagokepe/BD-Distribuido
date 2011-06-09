@@ -27,5 +27,13 @@ public class Catalogo extends ContentHashPastContent {
 	{
 		segments.add(fragId);
 	}
+	
+	public void printFileInfo() {
+		System.out.print("File Information:\n\tTitle: "+this.title+"\n\tSubject:"+this.subject+"\n\tDescription:"+this.description+"\n");
+	}
+	
+	public List<Id> getSegments(){
+		return this.segments;
+	}
 
 }

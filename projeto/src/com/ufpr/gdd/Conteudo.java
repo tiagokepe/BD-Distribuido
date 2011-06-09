@@ -17,5 +17,9 @@ public class Conteudo extends ContentHashPastContent {
 		
 		value = buffer;
 	}
+	
+	public byte[] getBuffer() {
+		return value;
+	}
 
 }

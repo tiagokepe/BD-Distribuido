@@ -118,8 +118,10 @@ public class Principal {
 
 		System.out.println("Finished creating new node " + node);
 		
-		mp.armazenar("/home/bcc/acsfj08/tracegraph202linux.tar.gz", null, null, null, null);
+		mp.armazenar("/home/bcc/acsfj08/tracegraph202linux.tar.gz", "lol", null, null, null);
 		
+		
+		mp.buscar("lol");
 		
 	}
 
