@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 import com.ufpr.gdd.Manipulacao;
+import com.ufpr.gdd.ManipulacaoException;
 import com.ufpr.gdd.Principal;
 
 public class View 
@@ -44,6 +45,13 @@ public class View
 							System.out.println("Erro: "+e.getMessage());
 						}
 					break;
+					case 2:
+						try {
+							System.out.println("Digite o termo a ser usado na pesquisa:");
+							manipulator.buscar(input.next());
+						} catch( ManipulacaoException e ) {
+							System.out.println("Erro na busca: "+e.getMessage());
+						}
 				}
 				
 				System.out.println("\nOpções: ");
