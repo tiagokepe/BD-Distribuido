@@ -30,7 +30,7 @@ public class Catalogo extends ContentHashPastContent {
 	}
 	
 	public void printFileInfo() {
-		System.out.print("File Information:\n\tTitle: "+this.title+"\n\tSubject:"+this.subject+"\n\tDescription:"+this.description+"\n");
+		System.out.print("Informação deste arquivo:\n\tTítulo: "+this.title+"\n\tAssunto:"+this.subject+"\n\tDescrição:"+this.description+"\n\tData:"+this.date.toString()+"\n");
 	}
 	
 	public List<Id> getSegments(){

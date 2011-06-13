@@ -62,7 +62,6 @@ import rice.persistence.*;
 public class Principal 
 {
 	// this will keep track of our applications
-	Aplicacao apps;
 
 	/**
 	 * This constructor launches numNodes PastryNodes. They will bootstrap to an
@@ -115,13 +114,6 @@ public class Principal
 				}
 			}
 		}
-
-		/**System.out.println("Finished creating new node " + node);
-		
-		mp.armazenar("/home/bcc/acsfj08/tracegraph202linux.tar.gz", "lol", null, null, null);
-		
-		
-		mp.buscar("lol");*/
 		
 		return mp;	
 	}
@@ -162,17 +154,9 @@ public class Principal
 			return new Principal().createManipulator(bindport, bootaddress, env);
 		} catch (Exception e) {
 			// remind user how to use
-			System.out.println("Usage:");
+			System.out.println("Uso:");
 			System.out
-					.println("java [-cp FreePastry-<version>.jar] rice.Principal.appsocket.Principal localbindport bootIP bootPort numNodes");
-			System.out.println("  or");
-			System.out
-					.println("java [-cp FreePastry-<version>.jar] rice.Principal.appsocket.Principal -direct numNodes");
-			System.out.println();
-			System.out
-					.println("example java rice.Principal.DistPrincipal 9001 pokey.cs.almamater.edu 9001 10");
-			System.out
-					.println("example java rice.Principal.DistPrincipal -direct 10");
+					.println("java com.ufpr.gdd.Principal localbindport bootIP bootPort ");
 			throw e;
 		}
 	}
@@ -183,7 +167,7 @@ public class Principal
 		try {
 			view.run(args);
 		} catch (Exception e){
-			System.out.println("Sistema finalizado com erro. "+e.getMessage());
+			System.out.println("Sistema finalizado com erro. ");
 		}
 		
 		System.exit(0);

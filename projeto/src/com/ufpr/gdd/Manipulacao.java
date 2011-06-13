@@ -117,6 +117,13 @@ public class Manipulacao {
 			ref.addCatalog(catId);
 			storeObject(ref);
 		}
+		
+		// Referência de data
+		if ( date != null ) {
+			ref = handleReference(date.toString());
+			ref.addCatalog(catId);
+			storeObject(ref);
+		}
 	}
  
 	/**

@@ -17,10 +17,7 @@ public class Conteudo extends ContentHashPastContent {
 	private int realSize = 0;
 	
 	public Conteudo(Id cId, byte[] buffer) {
-		super(cId);
-		
-		System.out.println(buffer.length);
-		
+		super(cId);		
 		value = buffer;
 	}
 	
