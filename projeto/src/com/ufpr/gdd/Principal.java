@@ -94,7 +94,8 @@ public class Principal
 		PastryIdFactory idFactory = new rice.pastry.commonapi.PastryIdFactory(env);
 		
 		Storage stor = new MemoryStorage(idFactory);
-		Past pst = new PastImpl(node, new StorageManagerImpl(idFactory, stor, new LRUCache( new MemoryStorage(idFactory), 512 * 1024, node.getEnvironment())), 0, "");
+		Past pst = new PastImpl(node, new StorageManagerImpl(idFactory, stor, new LRUCache( new MemoryStorage(idFactory), 0, node.getEnvironment())), 0, "");
+	//	Past pst = new PastImpl(node, new StorageManagerImpl(idFactory, stor, ), 0, "");
 
 		// Cria clase que manipulará requisições na DHT.
 		Manipulacao mp = new Manipulacao(pst, env, idFactory,node);

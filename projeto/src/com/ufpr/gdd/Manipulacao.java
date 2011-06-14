@@ -50,7 +50,8 @@ public class Manipulacao {
 		// O catalogo terá o array de Ids do arquivo
 		
 		// Geramos uma id única para este catálogo
-		Id catId = localFactory.buildId(title+subject+description);
+		//Id catId = localFactory.buildId(title+subject+description);
+        Id catId = localFactory.buildId(String.valueOf(System.currentTimeMillis()));
 		final Catalogo arquivo = new Catalogo(catId, path.substring(path.lastIndexOf("/") + 1), title, subject, description, date); 
 		
 		byte buffer[] = new byte[Conteudo.CONTENT_SIZE];
