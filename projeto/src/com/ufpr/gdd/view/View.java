@@ -111,6 +111,8 @@ public class View
 					manipulator.buscar(termo);
 				} catch( ManipulacaoException e ) {
 					System.out.println("Erro na busca: "+e.getMessage());
+				} catch (Exception e){
+					e.printStackTrace();
 				}
 			}
 			try {

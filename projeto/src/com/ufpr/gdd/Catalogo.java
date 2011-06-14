@@ -30,7 +30,10 @@ public class Catalogo extends ContentHashPastContent {
 	}
 	
 	public void printFileInfo() {
-		System.out.print("Informação deste arquivo:\n\tTítulo: "+this.title+"\n\tAssunto:"+this.subject+"\n\tDescrição:"+this.description+"\n\tData:"+this.date.toString()+"\n");
+		//System.out.print("Informação deste arquivo:\n\tTítulo: "+this.title+"\n\tAssunto:"+this.subject+"\n\tDescrição:"+this.description+"\n\tData:"+this.date.toString()+"\n");
+		System.out.print("Informação deste arquivo:\n\tTítulo: " + this.title
+				+ "\n\tAssunto:" + this.subject + "\n\tDescrição:"
+				+ this.description + "\n\tData:" + ((this.date != null)? date.toString(): null) + "\n");
 	}
 	
 	public List<Id> getSegments(){
