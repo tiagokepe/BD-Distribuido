@@ -1,11 +1,37 @@
+% THIS IS SIGPROC-SP.TEX - VERSION 3.1
+% WORKS WITH V3.2SP OF ACM_PROC_ARTICLE-SP.CLS
+% APRIL 2009
+%
+% It is an example file showing how to use the 'acm_proc_article-sp.cls' V3.2SP
+% LaTeX2e document class file for Conference Proceedings submissions.
+% ----------------------------------------------------------------------------------------------------------------
+% This .tex file (and associated .cls V3.2SP) *DOES NOT* produce:
+%       1) The Permission Statement
+%       2) The Conference (location) Info information
+%       3) The Copyright Line with ACM data
+%       4) Page numbering
+% ---------------------------------------------------------------------------------------------------------------
+% It is an example which *does* use the .bib file (from which the .bbl file
+% is produced).
+% REMEMBER HOWEVER: After having produced the .bbl file,
+% and prior to final submission,
+% you need to 'insert'  your .bbl file into your source .tex file so as to provide
+% ONE 'self-contained' source file.
+%
+% Questions regarding SIGS should be sent to
+% Adrienne Griscti ---> griscti@acm.org
+%
+% Questions/suggestions regarding the guidelines, .tex and .cls files, etc. to
+% Gerald Murray ---> murray@hq.acm.org
+%
+
 \documentclass{acm_proc_article-sp}
 \usepackage[brazil]{babel}
 \usepackage[utf8]{inputenc}
-%\bibliographystyle{plain}
-
 \begin{document}
 
 \title{Biblioteca Digital em uma rede P2P}
+
 %
 % You need the command \numberofauthors to handle the 'placement
 % and alignment' of the authors beneath the title.
@@ -67,7 +93,12 @@ Roger Roberto R. Duarte\\
 % There's nothing stopping you putting the seventh, eighth, etc.
 % author on the opening page (as the 'third row') but we ask,
 % for aesthetic reasons that you place these 'additional authors'
-% in the \additional authors bl\begin{thebibliography}{9}ock, viz.
+% in the \additional authors block, viz.
+
+% Just remember to make sure that the TOTAL number of authors
+% is the number that will appear on the first page PLUS the
+% number that will appear in the \additionalauthors section.
+
 \maketitle
 \begin{abstract}
 Este trabalho propõe um meio distribuído para catalogação de arquivos em uma rede P2P estruturada. Idéias gerais de uma implementação em uma rede Pastry são relatadas.
@@ -77,15 +108,11 @@ Este trabalho propõe um meio distribuído para catalogação de arquivos em uma
 
 \section{Introdução}
 
-O objetivo deste trabalho é criar uma maneira eficiente de armazenar arquivos em uma rede P2P. Duas operações nesta rede são consideradas: armazenamento e busca. Um arquivo armazenado nesta rede não pode mais ser retirado. 
-
-Ele pode ser buscado por atributos definidos no momento do armazenamento. Cada arquivo inserido na rede precisa ser segmentado, de tal forma que cada um dos segmentos não possa ter mais que 256KB.
+O objetivo deste trabalho é criar uma maneira eficiente de armazenar arquivos em uma rede P2P. Duas operações nesta rede são consideradas: armazenamento e busca. Um arquivo armazenado nesta rede não pode mais ser retirado. Ele pode ser buscado por atributos definidos no momento do armazenamento. Cada arquivo inserido na rede precisa ser segmentado, de tal forma que cada um dos segmentos não possa ter mais que 256KB.
 
 Para a criação de tal rede, é necessária a criação de um catálogo, que possa identificar os arquivos nesta rede. Este catálogo pode ser implementado de diversas formas, e a forma de implementação faz parte do objetivo deste trabalho.
 
-A nossa implementação é feita sobre uma rede estruturada \textit{Pastry}. 
-
-Utilizamos a \textit{Distributed Hash Table} (DHT) para armazenar os arquivos.
+A nossa implementação é feita sobre uma rede estruturada \textit{Pastry}. Utilizamos a \textit{Distributed Hash Table} (DHT) para armazenar os arquivos.
 
 \section{Ideías propostas}
 O grande desafio do trabalho, foi a criação e posteriormente o gerenciamento do Catálogo da rede. Primeiramente, pensamos em um catálogo centralizado, onde o controle de acesso e do arquivo, seria feito por um único peer.  Porém, a utilização de super peer quebra um principio básico de uma rede, ou seja, o comprometimento de deixar a rede sempre online.
@@ -115,9 +142,10 @@ Nesse contexto, iriamos criar um pequeno Web Service unido a um cluster de algum
 Nessa perspectiva, todo o Catálogo seria distribuído na DHT. Posteriormente, a 
 eficiência da  busca da DHT poderia ser utilizada.
 
+
 \section{Desenvolvimento}
 
-Escolhemos como ferramenta de desenvolvimento o \textit{framework} \textit{Free Pastry}. Ele é uma implementação livre da rede \textit{Pastry}. Usamos em especial a classe \textit{Past} desta ferramenta, a qual nos permite manipular de maneira direta e simples a DHT.
+Escolhemos como ferramenta de desenvolvimento o \textit{framework} \textit{Free Pastry}\cite{website:free-pastry}. Ele é uma implementação livre da rede \textit{Pastry}. Usamos em especial a classe \textit{Past} desta ferramenta, a qual nos permite manipular de maneira direta e simples a DHT.
 
 A elaboração de todo o trabalho foi feita utilizando a ideia destacada como Catálogo Distribuído. A eficiência na busca e a qualidade de serviço foram cruciais para utilizar essa proposta.
 
@@ -152,11 +180,23 @@ A maneira distribuída com que tratamos a nossa catalogação de arquivos nos pe
 
 Por outro lado, nossas Referências podem sofrer caso os atributos sejam muito repetitivos. Por exemplo, se tivéssemos uma busca por Idioma e possuíssemos $90\%$ dos atributos com o mesmo valor para este atributo, teríamos referências muito grandes.
 
-%\section{Referências}
-%\begin{thebibliography}{1}
+%
+% The following two commands are all you need in the
+% initial runs of your .tex file to
+% produce the bibliography for the citations in your paper.
+\bibliographystyle{abbrv}
+\bibliography{sigproc}  % sigproc.bib is the name of the Bibliography in this case
+% You must have a proper ".bib" file
+%  and remember to run:
+% latex bibtex latex latex
+% to resolve all references
+%
+% ACM needs 'a single self-contained file'!
+%
+%APPENDICES are optional
+%\balancecolumns
+\appendix
+%Appendix A
 
-%\bibitem{freepst}
- % FreePastry. June, 2011. FreePastry Tutorial. 
- % https://trac.freepastry.org/wiki/FreePastryTutorial.
-
-%\end{thebibliography}
+% That's all folks!
+\end{document}

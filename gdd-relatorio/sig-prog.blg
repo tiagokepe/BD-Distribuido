@@ -1,0 +1,47 @@
+This is BibTeX, Version 0.99c (Web2C 7.5.6)
+The top-level auxiliary file: sig-prog.aux
+The style file: abbrv.bst
+Database file #1: sigproc.bib
+Warning--to sort, need author or key in website:free-pastry
+You've used 1 entry,
+            2118 wiz_defined-function locations,
+            500 strings with 3755 characters,
+and the built_in function-call counts, 174 in all, are:
+= -- 13
+> -- 1
+< -- 0
++ -- 1
+- -- 0
+* -- 10
+:= -- 24
+add.period$ -- 1
+call.type$ -- 1
+change.case$ -- 3
+chr.to.int$ -- 0
+cite$ -- 2
+duplicate$ -- 7
+empty$ -- 24
+format.name$ -- 0
+if$ -- 39
+int.to.chr$ -- 0
+int.to.str$ -- 1
+missing$ -- 0
+newline$ -- 6
+num.names$ -- 0
+pop$ -- 9
+preamble$ -- 1
+purify$ -- 2
+quote$ -- 0
+skip$ -- 8
+stack$ -- 0
+substring$ -- 5
+swap$ -- 1
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 4
+warning$ -- 1
+while$ -- 0
+width$ -- 2
+write$ -- 8
+(There was 1 warning)

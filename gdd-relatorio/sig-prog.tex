@@ -1,0 +1,206 @@
+% THIS IS SIGPROC-SP.TEX - VERSION 3.1
+% WORKS WITH V3.2SP OF ACM_PROC_ARTICLE-SP.CLS
+% APRIL 2009
+%
+% It is an example file showing how to use the 'acm_proc_article-sp.cls' V3.2SP
+% LaTeX2e document class file for Conference Proceedings submissions.
+% ----------------------------------------------------------------------------------------------------------------
+% This .tex file (and associated .cls V3.2SP) *DOES NOT* produce:
+%       1) The Permission Statement
+%       2) The Conference (location) Info information
+%       3) The Copyright Line with ACM data
+%       4) Page numbering
+% ---------------------------------------------------------------------------------------------------------------
+% It is an example which *does* use the .bib file (from which the .bbl file
+% is produced).
+% REMEMBER HOWEVER: After having produced the .bbl file,
+% and prior to final submission,
+% you need to 'insert'  your .bbl file into your source .tex file so as to provide
+% ONE 'self-contained' source file.
+%
+% Questions regarding SIGS should be sent to
+% Adrienne Griscti ---> griscti@acm.org
+%
+% Questions/suggestions regarding the guidelines, .tex and .cls files, etc. to
+% Gerald Murray ---> murray@hq.acm.org
+%
+
+\documentclass{acm_proc_article-sp}
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+\begin{document}
+
+\title{Biblioteca Digital em uma rede P2P}
+
+%
+% You need the command \numberofauthors to handle the 'placement
+% and alignment' of the authors beneath the title.
+%
+% For aesthetic reasons, we recommend 'three authors at a time'
+% i.e. three 'name/affiliation blocks' be placed beneath the title.
+%
+% NOTE: You are NOT restricted in how many 'rows' of
+% "name/affiliations" may appear. We just ask that you restrict
+% the number of 'columns' to three.
+%
+% Because of the available 'opening page real-estate'
+% we ask you to refrain from putting more than six authors
+% (two rows with three columns) beneath the article title.
+% More than six makes the first-page appear very cluttered indeed.
+%
+% Use the \alignauthor commands to handle the names
+% and affiliations for an 'aesthetic maximum' of six authors.
+% Add names, affiliations, addresses for
+% the seventh etc. author(s) as the argument for the
+% \additionalauthors command.
+% These 'additional authors' will be output/set for you
+% without further effort on your part as the last section in
+% the body of your article BEFORE References or any Appendices.
+
+\numberofauthors{3} %  in this sample file, there are a *total*
+% of EIGHT authors. SIX appear on the 'first-page' (for formatting
+% reasons) and the remaining two appear in the \additionalauthors section.
+%
+\author{
+% You can go ahead and credit any number of authors here,
+% e.g. one 'row of three' or two rows (consisting of one row of three
+% and a second row of one, two or three).
+%
+% The command \alignauthor (no curly braces needed) should
+% precede each author name, affiliation/snail-mail address and
+% e-mail address. Additionally, tag each line of
+% affiliation/address with \affaddr, and tag the
+% e-mail address with \email.
+%
+% 1st. author
+\alignauthor
+Antonio Carlos S. Furtado Jr.\\
+       \affaddr{Universidade Federal do Paraná}\\
+       \affaddr{Curitiba, Paraná}\\
+       \email{acsfj08@inf.ufpr.br}
+% 2nd. author
+\alignauthor
+Roger Roberto R. Duarte\\
+       \affaddr{Universidade Federal do Paraná}\\
+       \affaddr{Curitiba, Paraná}\\
+       \email{rrrd08@inf.ufpr.br}
+% 3rd. author
+\alignauthor Tiago Rodrigo Kepe\\
+       \affaddr{Universidade Federal do Paraná}\\
+       \affaddr{Curitiba, Paraná}\\
+       \email{trk08@inf.ufpr.br}
+}
+% There's nothing stopping you putting the seventh, eighth, etc.
+% author on the opening page (as the 'third row') but we ask,
+% for aesthetic reasons that you place these 'additional authors'
+% in the \additional authors block, viz.
+
+% Just remember to make sure that the TOTAL number of authors
+% is the number that will appear on the first page PLUS the
+% number that will appear in the \additionalauthors section.
+
+\maketitle
+\begin{abstract}
+Este trabalho propõe um meio distribuído para catalogação de arquivos em uma rede P2P estruturada. Idéias gerais de uma implementação em uma rede Pastry são relatadas.
+\end{abstract}
+
+
+
+\section{Introdução}
+
+O objetivo deste trabalho é criar uma maneira eficiente de armazenar arquivos em uma rede P2P. Duas operações nesta rede são consideradas: armazenamento e busca. Consideramos também que um arquivo armazenado nesta rede não pode mais ser retirado. Ele pode ser buscado por atributos definidos no momento do armazenamento. Cada arquivo inserido na rede precisa ser segmentado, de tal forma que cada um dos segmentos não possa ter mais que 256KB.
+
+Para a criação de tal rede, é necessário que seja feito um catálogo, que possa identificar os arquivos nesta rede. Este catálogo pode ser implementado de diversas formas, e a forma de implementação faz parte do objetivo deste trabalho.
+
+A nossa implementação é feita sobre uma rede estruturada \textit{Pastry}. Utilizamos a sua \textit{Distributed Hash Table} (DHT) para armazenar os arquivos.
+
+\section{Idéias propostas}
+O grande desafio do trabalho foi a criação e posteriormente o gerenciamento do Catálogo da rede. Primeiramente, pensamos em um catálogo centralizado, onde o controle de acesso e do arquivo seriam feitos por um único peer.  Porém, a utilização de um \textit{super peer} quebra um principio básico de uma rede, ou seja, o comprometimento de deixar a rede sempre \textit{online}.
+
+Posteriormente, pensamos em criar um pequeno \textit{cluster} e manter nele um \textit{Web Service}, onde seria possível efetuar redundância entre as máquinas e o acesso deixaria de ser totalmente centralizado. Sendo assim, a troca de mensagens entre os peers e o Web Service poderia ser através de pequenos XML's. Lembrando, o Web Service guardaria somente o Catálogo, e a DHT em si, guardaria os arquivos particionados.
+
+A terceira ideia, seria criar um Catálogo distribuído. Deixando assim, a dependência da estabilidade da rede em somente um peer ou um pequeno cluster.
+
+Aqui estão as principais idéias que foram consideradas:
+
+\subsection{Peer Centralizado}
+
+Com um peer centralizado, o trabalho no gerenciamento/acesso ao Catálogo seria facilmente resolvido. Haja vista, que somente um peer trabalharia para efetuar as buscas/inserções no Catálogo. 
+
+Nessa perspectiva, seria necessário criar uma \textit{hash} para o \textit{super-peer}, inclui-lo na rede e posteriormente, este deveria receber uma quantidade exagerada de requisições de inserção/busca no Catálogo.
+
+O problema intrínseco nessa ideia, é a utilização do “super-peer”. A rede inteira ficaria dependente deste, diminuindo assim a qualidade de serviço e a estabilidade da rede.
+
+\subsection{Web Service}
+
+Nesse contexto, iriamos criar um pequeno Web Service unido a um cluster de algumas máquinas. O Catálogo seria plenamente gerenciado pelo conjunto de máquina do cluster e todo acesso/inserção deveria ser feito através de serviço (WSDL).
+
+\subsection{Catálogo Distribuído}
+
+Nessa perspectiva, todo o Catálogo seria distribuído na DHT. Posteriormente, a 
+eficiência da  busca da DHT poderia ser utilizada.
+
+
+\section{Desenvolvimento}
+
+Escolhemos como ferramenta de desenvolvimento o \textit{framework} \textit{Free Pastry}\cite{website:free-pastry}. Ele é uma implementação livre da rede \textit{Pastry}. Usamos em especial a classe \textit{Past} desta ferramenta, a qual nos permite manipular de maneira direta e simples a DHT.
+
+A elaboração de todo o trabalho foi feita utilizando a idéia destacada como Catálogo Distribuído. A eficiência na busca e a qualidade de serviço foram cruciais para utilizar essa proposta.
+
+Para que pudessemos manter os arquivos  de maneira distribuída, de uma forma que pudéssemos buscá-los com base em palavras-chave, criamos três classes principais para  a manutenção desta biblioteca digital. Todas elas são objetos que devem ser inseridos na DHT. Cada objeto necessita obrigatoriamente de uma identificação para ser armazenado. Usamos o gerador de identificação do próprio FreePastry para identificar esses objetos. Vamos descrever cada um:
+\begin{itemize}
+ \item \textbf{Conteúdo}:
+	Este objeto representa um segmento de um arquivo. Como todo arquivo inserido deve ser quebrado em pedaços de 256Kb, cada segmento terá no máximo este valor em dados. Sua identificação é gerada com base nestes dados;
+	
+ \item \textbf{Catálogo}:
+	Aqui redefinimos um pouco o conceito original de catálogo. Este objeto não aponta para segmentos de vários arquivos, e sim para os segmentos de um único arquivo. Ele mantém um \textit{array} de identificadores de cada Conteúdo. Além disso ele deve manter cada um dos atributos especificados para este arquivo. Sua identificação é feita com base na soma de cada um de seus atributos.
+	Os atributos escolhidos para implementar o catálogo foram:
+	\begin{itemize}
+	 \item Título;
+	 \item Assunto;
+	 \item Descrição;
+	 \item Data.
+	\end{itemize}
+
+	
+ \item \textbf{Referência}:
+	A Referência é crucial para a realização de buscas. É gerada uma identificação para cada um dos atributos de um Catálogo. Cada uma destas identificações se transformará em uma identificação de uma Referência. Há duas situações possíveis neste caso. A primeira é de que já exista uma referência com esta identificação na DHT, no caso onde há dois arquivos com atributos iguais. Nesta situação a Referência é apenas atualizada e reescrita na DHT, apontando para dois Catálogos. A segunda situação é mais simples, se nenhuma Referência for encontrada na DHT com aquela identificação, uma nova Referência é criada e inserida na DHT, apontando para o catálogo novo.
+	
+	Como podemos ver, a relação entre Referência e Catálogo é de muitos para muitos. Assim como podemos ter vários atributos cujas Referências apontam para o Catálogo, podemos ter Referências que apontam para vários catálogos
+\end{itemize}
+
+
+Com base na construção dessas classes, nós permitimos que um arquivo que foi inserido possa ser recuperado nesta rede. Por exemplo, quando o usuário digitar um termo a ser pesquisado, uma identificação será gerada com base neste termo. Esta identificação será usada para buscar uma Referência correspondente. Esta Referência então apontará para todos os Catálogos que correspondem àquele termo, as informações de cada um deles serão mostradas ao usuário que fez a pesquisa. Ele então escolherá um Catálogo entre os apresentados, do qual serão retornados os dados dos Conteúdos indicados por ele. 
+
+\subsection{Problemas encontrados}
+
+Como explicado anteriormente, o objeto Referência é mutável. Por padrão, o FreePastry não aceita sobrescrever dados já inseridos na DHT. Isto não foi um grande empecilho, já que o método que nega esta ação pode ser redefinido no caso das Referências. O problema disso é que a DHT não trabalha corretamente com objetos mutáveis quando se usa uma \textit{cache} de dados, a qual deve ser definida no momento em que o tipo de armazenamento da DHT é instanciado. Isto pode levar a uma inconsistência, se o objeto em cache não for atualizado em toda a hierarquia de armazenamento. Podem ser criadas Referências distintas com a mesma identificação.
+
+Nossa solução foi abrir mão da cache, e portanto abir mão da sua eficiência. Como a consistência de nossos dados é mais importante que a rapidez da busca de dados na DHT, a remoção foi satisfatória.
+
+\section{Conclusão}
+
+A maneira distribuída com que tratamos a nossa catalogação de arquivos nos permitiu ficar menos dependentes de um \textit{peer} centralizado. Desta forma, se ele desejar sair da rede, não precisamos remanejar as referências de todos os arquivos, que podem ser muitas. Ou seja, não há um desperdício de banda muito grande. Também não corremos o risco de perder essas referências, no caso de uma pane na conexão com o \textit{peer} central, já que conseguimos não apenas distribuir o conteúdo dos arquivos, mas também suas referências. Nós delegamos a responsabilidade de distribuição de todas nossas instâncias para a DHT.
+
+Por outro lado, nossas Referências podem sofrer caso os atributos sejam muito repetitivos. Por exemplo, se tivéssemos uma busca por Idioma e possuíssemos $90\%$ dos atributos com o mesmo valor para este atributo, teríamos referências muito grandes. Porém elas seriam ainda menores que todos os dados necessários para se montar um catálogo centralizado.
+
+%
+% The following two commands are all you need in the
+% initial runs of your .tex file to
+% produce the bibliography for the citations in your paper.
+\bibliographystyle{abbrv}
+\bibliography{sigproc}  % sigproc.bib is the name of the Bibliography in this case
+% You must have a proper ".bib" file
+%  and remember to run:
+% latex bibtex latex latex
+% to resolve all references
+%
+% ACM needs 'a single self-contained file'!
+%
+%APPENDICES are optional
+%\balancecolumns
+%\appendix
+%Appendix A
+
+% That's all folks!
+\end{document}
