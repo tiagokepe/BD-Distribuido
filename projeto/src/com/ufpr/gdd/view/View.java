@@ -129,7 +129,8 @@ public class View
 			options = input.nextInt();	
 		}
 
-
+		manipulator.end();
 		System.out.println("==========================================================");
 	}
+	
 }

@@ -289,4 +289,7 @@ public class Manipulacao {
 		
 		return false;
 	}
+	public void end() {
+		this.env.destroy();
+	}
 }
